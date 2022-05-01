@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -30,8 +30,16 @@ import { Grid } from "@mui/material";
 //   ];
   
   export default function Message(props) {
+    const messagesEndRef = React.createRef();
+    const scrollToBottom = () => {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    };
+    useEffect(() => {
+        scrollToBottom();
+    }, [])
+
     return (
-      <TableContainer >
+      <TableContainer>
         <Table aria-label="simple table">
           {/* <TableHead>
             <TableRow>
@@ -57,7 +65,7 @@ import { Grid } from "@mui/material";
                 {/* <TableCell align="right">{props.carbs}</TableCell>
                 <TableCell align="right">{props.protein}</TableCell> */}
               </TableRow>
-
+              <div ref={messagesEndRef} />
           </TableBody>
         </Table>
       </TableContainer>

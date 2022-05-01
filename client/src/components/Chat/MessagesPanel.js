@@ -19,19 +19,21 @@ export const MessagesPanel = (props) => {
 
   const handleInput = (e) => {
     setState({ input_value: e.target.value });
-  };
+};
 
   let list;
   if (props.channel && props.channel.messages) {
     list = props.channel.messages.map((m) => {
       return (
-        <Message
-          key={m.id}
-          id={m.id}
-          senderName={m.senderName}
-          text={m.text}
-          time={m.time}
-        />
+        <>
+          <Message
+            key={m.id}
+            id={m.id}
+            senderName={m.senderName}
+            text={m.text}
+            time={m.time}
+          />
+        </>
       );
     });
   } else {
@@ -40,18 +42,17 @@ export const MessagesPanel = (props) => {
     );
   }
 
-
   return (
     <Grid container direction={"column"}>
-        <Paper style={{minHeight: 400 , maxHeight: 400, overflow: "auto" }}>
-            {list}
-        </Paper>
+      <Paper style={{ minHeight: '90vh', maxHeight: '90vh', overflow: "auto" }}>
+        {list}
+      </Paper>
       <Grid item display="flex" justifyContent="space-between" mt={2}>
         {props.channel && (
           <div>
             <Box component="form" onSubmit={send}>
               <Input
-                style={{ width: 1000, height: 40 }}
+                style={{ width: '83vw', height: 40 }}
                 type="text"
                 onChange={handleInput}
                 value={state.input_value}
@@ -60,14 +61,6 @@ export const MessagesPanel = (props) => {
                 p="2"
                 inputProps={{ style: { textAlign: "left" } }}
               />
-              <Button
-                onClick={send}
-                size="medium"
-                variant="contained"
-                endIcon={<SendIcon />}
-              >
-                Send
-              </Button>
             </Box>
           </div>
         )}
