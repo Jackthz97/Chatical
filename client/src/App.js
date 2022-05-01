@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import { Chat } from "./components/Chat/Chat";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { grey, common } from "@mui/material/colors";
-import { ScopedCssBaseline } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 
 function App() {

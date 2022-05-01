@@ -1,4 +1,7 @@
 import React from 'react';
+import { Button } from '@mui/material';
+import { Avatar } from '@mui/material';
+import { Tooltip } from '@mui/material';
 
 
 export class Channel extends React.Component {
@@ -9,9 +12,13 @@ export class Channel extends React.Component {
 
     render() {
         return (
-            <div  onClick={this.click}>
-                <div>{this.props.name}</div>
-                <span>{this.props.participants}</span>
+            <div>
+                <Button onClick={this.click}>
+                <Tooltip title={this.props.name} placement="right-start" arrow>
+                <Avatar>{this.props.name}</Avatar>
+                </Tooltip>
+                </Button>
+                <p>Online: {this.props.participants}</p>
             </div>
         )
     }

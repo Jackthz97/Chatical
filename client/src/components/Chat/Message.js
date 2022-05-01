@@ -39,14 +39,14 @@ export default function Message(props) {
           >
             <TableCell component="th" scope="row">
               <Grid container direction={'row'}>
-                  <Grid item xs={1}>
+                  <Grid item xs={0.5}>
               <Avatar src={props.img} alt={props.senderName}  sx={{ width: 55, height: 55, mt: 1.5}}/>
               </Grid>
-              <Grid item xs={11}>
+              <Grid item xs={11.5}>
                 <p>
                   {props.senderName} {props.time}
                 </p>
-                <p>{props.text}</p>
+                <span>{props.text}</span>
               </Grid>
               </Grid>
             </TableCell>
