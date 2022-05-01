@@ -39,6 +39,9 @@ app.put("/user-data", (req, res) => {
     })
     .catch((e) => console.error(e.stack));
 });
+app.put('/user-messages', (req, res) => {
+  console.log("okokoookokok", req.body);
+});
 
 const server = http.createServer(app);
 
