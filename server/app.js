@@ -34,7 +34,7 @@ const io = new Server(server, {
 });
 const STATIC_CHANNELS = [
   {
-    name: "Trending",
+    name: "channel 1",
     img: "https://www.un.org/sites/un2.un.org/files/styles/large-article-image-style-16-9/public/field/image/1597430564.8627.jpg?itok=k7m8PyxC",
     dis: "Join the room to talk about what's hot in the crypto market.",
     participants: 0,
@@ -42,7 +42,7 @@ const STATIC_CHANNELS = [
     sockets: [],
   },
   {
-    name: "Market",
+    name: "Channel 2",
     img: "https://mtltimes.ca/wp-content/uploads/2022/02/crypto-market.jpg",
     dis: "Join the room to talk about anything related to the crypto Market.",
     participants: 0,
@@ -50,7 +50,7 @@ const STATIC_CHANNELS = [
     sockets: [],
   },
   {
-    name: "Events",
+    name: "Channel 3",
     img: "https://www.altcoinbuzz.io/wp-content/uploads/2022/01/Top-crypto-news-1200-x-630-px.jpg",
     dis: "Join the room to talk about any events related to any crypto.",
     participants: 0,
@@ -58,7 +58,7 @@ const STATIC_CHANNELS = [
     sockets: [],
   },
   {
-    name: "General",
+    name: "Channel 4",
     img: "https://image.cnbcfm.com/api/v1/image/106837526-1612866638564-gettyimages-1294702554-yn_cryptoimages_016.jpeg?v=1638814215&w=1920&h=1080",
     dis: "Join the room to talk about anything related to crypto.",
     participants: 0,
