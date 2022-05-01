@@ -1,35 +1,77 @@
-import React from 'react';
-import { Message } from './Message';
+import React from "react";
+import Message from "./Message";
+import { Button, Grid, Paper } from "@mui/material";
+import { Box } from "@mui/system";
+import { useState } from "react";
+import SendIcon from "@mui/icons-material/Send";
+import { Input } from "@mui/material";
+import { useEffect } from "react";
 
-export class MessagesPanel extends React.Component {
-    state = { input_value: '' }
-    send = () => {
-        if (this.state.input_value && this.state.input_value != '') {
-            this.props.onSendMessage(this.props.channel.id, this.state.input_value);
-            this.setState({ input_value: '' });
-        }
+export const MessagesPanel = (props) => {
+  const [state, setState] = useState({ input_value: "" });
+  const send = (e) => {
+    e.preventDefault();
+    if (state.input_value && state.input_value != "") {
+      props.onSendMessage(props.channel.id, state.input_value);
+      setState({ input_value: "" });
     }
+  };
 
-    handleInput = e => {
-        this.setState({ input_value: e.target.value });
-    }
+  const handleInput = (e) => {
+    setState({ input_value: e.target.value });
+  };
 
-    render() {
+  let list;
+  if (props.channel && props.channel.messages) {
+    list = props.channel.messages.map((m) => {
+      return (
+        <Message
+          key={m.id}
+          id={m.id}
+          senderName={m.senderName}
+          text={m.text}
+          time={m.time}
+        />
+      );
+    });
+  } else {
+    list = (
+      <div className="no-content-message">There is no messages to show</div>
+    );
+  }
 
-        let list = <div className="no-content-message">There is no messages to show</div>;
-        if (this.props.channel && this.props.channel.messages) {
-            list = this.props.channel.messages.map(m => <Message key={m.id} id={m.id} senderName={m.senderName} text={m.text} time={m.time}/>);
-        }
-        return (
-            <div className='messages-panel'>
-                <div className="meesages-list">{list}</div>
-                {this.props.channel &&
-                    <div className="messages-input">
-                        <input type="text" onChange={this.handleInput} value={this.state.input_value} />
-                        <button onClick={this.send}>Send</button>
-                    </div>
-                }
-            </div>);
-    }
 
-}
+  return (
+    <Grid container direction={"column"}>
+        <Paper style={{minHeight: 400 , maxHeight: 400, overflow: "auto" }}>
+            {list}
+        </Paper>
+      <Grid item display="flex" justifyContent="space-between" mt={2}>
+        {props.channel && (
+          <div>
+            <Box component="form" onSubmit={send}>
+              <Input
+                style={{ width: 1000, height: 40 }}
+                type="text"
+                onChange={handleInput}
+                value={state.input_value}
+                size="72"
+                placeholder="Write your message here.."
+                p="2"
+                inputProps={{ style: { textAlign: "left" } }}
+              />
+              <Button
+                onClick={send}
+                size="medium"
+                variant="contained"
+                endIcon={<SendIcon />}
+              >
+                Send
+              </Button>
+            </Box>
+          </div>
+        )}
+      </Grid>
+    </Grid>
+  );
+};

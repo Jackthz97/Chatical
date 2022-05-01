@@ -3,6 +3,8 @@ import { ChannelList } from "./ChannelList";
 import "./chat.scss";
 import { MessagesPanel } from "./MessagesPanel";
 import socketClient from "socket.io-client";
+import { Button, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 const SERVER = "http://127.0.0.1:8080";
 export class Chat extends React.Component {
   state = {
@@ -87,17 +89,23 @@ export class Chat extends React.Component {
 
   render() {
     return (
-      <div className="chat-app">
-        <button onClick={this.handleMode}></button>
-        <ChannelList
-          channels={this.state.channels}
-          onSelectChannel={this.handleChannelSelect}
-        />
-        <MessagesPanel
-          onSendMessage={this.handleSendMessage}
-          channel={this.state.channel}
-        />
-      </div>
+      <Grid container>
+        <Grid item xs={2}>
+        <Typography>
+          <Button onClick={this.handleMode}>{this.props.mode} mode</Button>
+        </Typography>
+          <ChannelList
+            channels={this.state.channels}
+            onSelectChannel={this.handleChannelSelect}
+          />
+        </Grid>
+        <Grid item width={'100%'} xs={10}>
+          <MessagesPanel
+            onSendMessage={this.handleSendMessage}
+            channel={this.state.channel}
+          />
+        </Grid>
+      </Grid>
     );
   }
 }
