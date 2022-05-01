@@ -4,6 +4,7 @@ import { MessagesPanel } from "./MessagesPanel";
 import socketClient from "socket.io-client";
 import { Button, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
+import axios from "axios";
 const SERVER = "http://127.0.0.1:8080";
 export class Chat extends React.Component {
   state = {

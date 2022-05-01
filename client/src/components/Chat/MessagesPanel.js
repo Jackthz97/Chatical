@@ -6,6 +6,7 @@ import { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { Input } from "@mui/material";
 import { useEffect } from "react";
+import axios from "axios";
 
 export const MessagesPanel = (props) => {
   const user = JSON.parse(localStorage.getItem("username"));
@@ -20,7 +21,26 @@ export const MessagesPanel = (props) => {
 
   const handleInput = (e) => {
     setState({ input_value: e.target.value });
-};
+    const date = new Date();
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+    const time = new Intl.DateTimeFormat("en-US", options).format(date);
+    let data = {
+      text: e.target.value,
+      user_name: user.name,
+      channel_id: props.channel.id,
+      date: Date.now(),
+      time: time,
+    };
+    if (e.target.value) {
+      axios
+        .put("/user-messages", data)
+        .then((res) => console.log("res.data: ", res.data));
+    }
+  };
 
   let list;
   if (props.channel && props.channel.messages) {
@@ -46,7 +66,7 @@ export const MessagesPanel = (props) => {
 
   return (
     <Grid container direction={"column"}>
-      <Paper style={{ minHeight: '90vh', maxHeight: '90vh', overflow: "auto" }}>
+      <Paper style={{ minHeight: "90vh", maxHeight: "90vh", overflow: "auto" }}>
         {list}
       </Paper>
       <Grid item display="flex" justifyContent="space-between" mt={2}>
@@ -54,7 +74,7 @@ export const MessagesPanel = (props) => {
           <div>
             <Box component="form" onSubmit={send}>
               <Input
-                style={{ width: '83vw', height: 40 }}
+                style={{ width: "83vw", height: 40 }}
                 type="text"
                 onChange={handleInput}
                 value={state.input_value}
