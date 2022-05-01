@@ -1,0 +1,1 @@
+INSERT INTO channels (name) VALUES ('Test Channel');
