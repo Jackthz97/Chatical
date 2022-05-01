@@ -14,32 +14,13 @@ export const MessagesPanel = (props) => {
   const send = (e) => {
     e.preventDefault();
     if (state.input_value && state.input_value != "") {
-      props.onSendMessage(props.channel.id, state.input_value);
-      setState({ input_value: "" });
+        props.onSendMessage(props.channel.id, state.input_value);
+        setState({ input_value: "" });
     }
   };
 
   const handleInput = (e) => {
     setState({ input_value: e.target.value });
-    const date = new Date();
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    };
-    const time = new Intl.DateTimeFormat("en-US", options).format(date);
-    let data = {
-      text: e.target.value,
-      user_name: user.name,
-      channel_id: props.channel.id,
-      date: Date.now(),
-      time: time,
-    };
-    if (e.target.value) {
-      axios
-        .put("/user-messages", data)
-        .then((res) => console.log("res.data: ", res.data));
-    }
   };
 
   let list;

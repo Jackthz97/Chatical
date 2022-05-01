@@ -81,6 +81,17 @@ export class Chat extends React.Component {
       time: time,
       id: Date.now(),
     });
+    let data = {
+        text: text,
+        user_name: this.user.name,
+        channel_id: channel_id,
+        date: date.toString(),
+        time: time,
+      };
+    axios
+    .put("/user-messages", data)
+    .then((res) => console.log("res.data: ", res));
+
   };
   handleMode = () => {
     this.props.mode === "dark"
