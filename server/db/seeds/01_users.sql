@@ -1,1 +1,1 @@
-INSERT INTO users (name, email, password, channels_id) VALUES ('Jack', 'jack@mail.com', '123', 1);
+INSERT INTO users (name, email, password, img, channels_id) VALUES ('Jack', 'jack@mail.com', '123', 'jack.jpg', 1);

@@ -32,6 +32,7 @@ export const MessagesPanel = (props) => {
             senderName={m.senderName}
             text={m.text}
             time={m.time}
+            img={m.img}
           />
         </>
       );

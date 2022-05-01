@@ -9,7 +9,7 @@ import { ScopedCssBaseline } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 
 function App() {
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
   const darkTheme = createTheme({
     palette: {
       ...(mode === "light"

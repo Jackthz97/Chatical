@@ -1,6 +1,5 @@
 import React from "react";
 import { ChannelList } from "./ChannelList";
-import "./chat.scss";
 import { MessagesPanel } from "./MessagesPanel";
 import socketClient from "socket.io-client";
 import { Button, Grid } from "@mui/material";
@@ -76,6 +75,7 @@ export class Chat extends React.Component {
     this.socket.emit("send-message", {
       channel_id,
       text,
+      img: 'jack.jpg',
       senderName: this.socket.id,
       time: time,
       id: Date.now(),
