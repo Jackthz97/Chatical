@@ -8,6 +8,7 @@ import { Input } from "@mui/material";
 import { useEffect } from "react";
 
 export const MessagesPanel = (props) => {
+  const user = JSON.parse(localStorage.getItem("username"));
   const [state, setState] = useState({ input_value: "" });
   const send = (e) => {
     e.preventDefault();

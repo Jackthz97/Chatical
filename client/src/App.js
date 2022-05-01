@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import Grid from "@mui/material/Grid";
 import { Chat } from "./components/Chat/Chat";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { grey, common } from "@mui/material/colors";
 import { CssBaseline } from "@mui/material";
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login/Login";
+import ProtectedRoutes from "./hooks/userAuth";
 
 function App() {
   const [mode, setMode] = useState("dark");
@@ -43,14 +45,19 @@ function App() {
   });
   return (
     <ThemeProvider theme={darkTheme}>
-      {/* <ScopedCssBaseline enableColorScheme > */}
       <CssBaseline />
-      <div className={mode}>
-        <Grid>
-          <Chat mode={mode} setMode={setMode} />
-        </Grid>
+      <div>
+      <Routes>
+          <Route path="/" element={<Login />} />
+
+          <Route path="/" element={<ProtectedRoutes />}>
+          <Route
+              path="/chat"
+              element={<Chat mode={mode} setMode={setMode} />}
+            />
+            </Route>
+        </Routes>
       </div>
-      {/* </ScopedCssBaseline> */}
     </ThemeProvider>
   );
 }

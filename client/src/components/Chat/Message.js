@@ -15,7 +15,6 @@ export default function Message(props) {
   useEffect(() => {
     scrollToBottom();
   }, []);
-
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -39,13 +38,13 @@ export default function Message(props) {
           >
             <TableCell component="th" scope="row">
               <Grid container direction={'row'}>
-                  <Grid item xs={0.5}>
+                  <Grid item mr={2}>
               <Avatar src={props.img} alt={props.senderName}  sx={{ width: 55, height: 55, mt: 1.5}}/>
               </Grid>
-              <Grid item xs={11.5}>
-                <p>
+              <Grid item >
+                <Grid mt={2.5}>
                   {props.senderName} {props.time}
-                </p>
+                </Grid>
                 <span>{props.text}</span>
               </Grid>
               </Grid>

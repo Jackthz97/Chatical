@@ -75,8 +75,8 @@ export class Chat extends React.Component {
     this.socket.emit("send-message", {
       channel_id,
       text,
-      img: 'jack.jpg',
-      senderName: this.socket.id,
+      img: this.user.img,
+      senderName: this.user.name,
       time: time,
       id: Date.now(),
     });
@@ -86,13 +86,14 @@ export class Chat extends React.Component {
       ? this.props.setMode("light")
       : this.props.setMode("dark");
   };
-
+    user = JSON.parse(localStorage.getItem("username"));
   render() {
     return (
       <Grid container>
         <Grid item xs={2}>
         <Typography>
           <Button onClick={this.handleMode}>{this.props.mode} mode</Button>
+          <span>welcome back {this.user.name}</span>
         </Typography>
           <ChannelList
             channels={this.state.channels}
