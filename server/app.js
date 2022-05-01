@@ -24,6 +24,22 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/users", usersRouter(db));
 
+app.put("/user-data", (req, res) => {
+  let data = {
+    email: req.body.data.email,
+    password: req.body.data.password,
+  };
+  console.log("req.body from frontend: ", data.email, data.password);
+  db.query(`SELECT * FROM users WHERE email = $1 AND password = $2`, [
+    data.email,
+    data.password,
+  ])
+    .then((response) => {
+      res.send(response.rows[0]);
+    })
+    .catch((e) => console.error(e.stack));
+});
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
