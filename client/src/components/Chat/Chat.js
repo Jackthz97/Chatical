@@ -11,6 +11,7 @@ export class Chat extends React.Component {
     channels: null,
     socket: null,
     channel: null,
+    msm: "",
   };
   socket;
   componentDidMount() {
@@ -63,6 +64,9 @@ export class Chat extends React.Component {
     });
     this.setState({ channel });
     this.socket.emit("channel-join", id, (ack) => {});
+    axios.put('/get-message', {data: id})
+    .then(res => this.state.msm(res.data))
+    .catch(error => console.log(error));
   };
 
   handleSendMessage = (channel_id, text) => {
@@ -83,6 +87,7 @@ export class Chat extends React.Component {
     });
     let data = {
         text: text,
+        userid: this.user.id,
         user_name: this.user.name,
         channel_id: channel_id,
         date: date.toString(),
@@ -116,6 +121,7 @@ export class Chat extends React.Component {
           <MessagesPanel
             onSendMessage={this.handleSendMessage}
             channel={this.state.channel}
+            msm={this.state.msm}
           />
         </Grid>
       </Grid>
