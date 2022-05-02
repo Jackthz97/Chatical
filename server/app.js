@@ -48,12 +48,13 @@ app.put('/user-messages', (req, res) => {
     user: req.body.user_name,
     channelid: req.body.channel_id,
     date: req.body.date,
-    time: req.body.time
+    time: req.body.time,
+    img: req.body.img
   };
 
-  db.query(`INSERT INTO messages (user_name, user_id, text, channels_id, date, time)
-  VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
-  [data.user, data.userid, data.text, data.channelid, data.date, data.time])
+  db.query(`INSERT INTO messages (user_name, user_id, img, text, channels_id, date, time)
+  VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
+  [data.user, data.userid, data.img, data.text, data.channelid, data.date, data.time])
     .then((res) => res.send(res))
     .catch((error) => res.send(error));
 });
