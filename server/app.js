@@ -39,20 +39,30 @@ app.put("/user-data", (req, res) => {
     })
     .catch((e) => console.error(e.stack));
 });
+
 app.put('/user-messages', (req, res) => {
 
   let data = {
     text: req.body.text,
+    userid: req.body.userid,
     user: req.body.user_name,
     channelid: req.body.channel_id,
     date: req.body.date,
     time: req.body.time
   };
-  db.query(`INSERT INTO messages (user_name, text, channels_id, date, time)
-  VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-  [data.user, data.text, data.channelid, data.date, data.time])
+
+  db.query(`INSERT INTO messages (user_name, user_id, text, channels_id, date, time)
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+  [data.user, data.userid, data.text, data.channelid, data.date, data.time])
     .then((res) => res.send(res))
     .catch((error) => res.send(error));
+});
+
+app.put('/get-message', (req, res) => {
+  console.log("from msm req: ",req.body)
+  db.query(`SELECT * FROM messages WHERE channels_id = $1`, [req.body.data])
+    .then(responds => {console.log(responds.rows); res.send(responds.rows)})
+    .catch((e) => console.error(e.stack));
 });
 
 const server = http.createServer(app);
