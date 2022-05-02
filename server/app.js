@@ -60,9 +60,11 @@ app.put('/user-messages', (req, res) => {
 });
 
 app.put('/get-message', (req, res) => {
-  console.log("from msm req: ",req.body)
-  db.query(`SELECT * FROM messages WHERE channels_id = $1`, [req.body.data])
-    .then(responds => {console.log(responds.rows); res.send(responds.rows)})
+  console.log("from msm req: ",req.body);
+  db.query(`SELECT * FROM messages WHERE channels_id = $1 ORDER BY id DESC LIMIT 10`, [req.body.data])
+    .then(responds => {
+      res.send(responds.rows.reverse());
+    })
     .catch((e) => console.error(e.stack));
 });
 

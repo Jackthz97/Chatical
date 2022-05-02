@@ -1,18 +1,12 @@
 import React from "react";
 import Message from "./Message";
-import { Button, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import SendIcon from "@mui/icons-material/Send";
 import { Input } from "@mui/material";
-import { useEffect } from "react";
-import axios from "axios";
 
 export const MessagesPanel = (props) => {
-  const user = JSON.parse(localStorage.getItem("username"));
   const [state, setState] = useState({ input_value: "" });
-  console.log("testetststtststs: ", props.msm)
-
   let prev;
   if (props.msm) {
     prev = props.msm.map((e) => {
@@ -36,6 +30,7 @@ export const MessagesPanel = (props) => {
   }
 
   const send = (e) => {
+    // (scroll === 'smooth') && setScroll('auto');
     e.preventDefault();
     if (state.input_value && state.input_value != "") {
         props.onSendMessage(props.channel.id, state.input_value);

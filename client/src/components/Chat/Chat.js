@@ -5,6 +5,7 @@ import socketClient from "socket.io-client";
 import { Button, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import axios from "axios";
+
 const SERVER = "http://127.0.0.1:8080";
 export class Chat extends React.Component {
 
@@ -13,7 +14,6 @@ export class Chat extends React.Component {
     socket: null,
     channel: null,
     msm: [],
-    render: false
   };
   socket;
   componentDidMount() {
@@ -62,11 +62,6 @@ export class Chat extends React.Component {
   };
 
   handleChannelSelect = (id) => {
-    // if (this.state.render) {
-    //   this.setState({render: false})
-    // } else {
-    //   this.setState({render: true})
-    // }
     let channel = this.state.channels.find((c) => {
       return c.id === id;
     });
@@ -124,8 +119,6 @@ export class Chat extends React.Component {
           <ChannelList
             channels={this.state.channels}
             onSelectChannel={this.handleChannelSelect}
-            render={this.state.render}
-            setState={this.setState}
           />
         </Grid>
         <Grid item width={'100%'} xs={10}>
@@ -133,7 +126,6 @@ export class Chat extends React.Component {
             onSendMessage={this.handleSendMessage}
             channel={this.state.channel}
             msm={this.state.msm}
-            render={this.state.render}
           />
         </Grid>
       </Grid>

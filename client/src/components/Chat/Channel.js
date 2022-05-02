@@ -5,11 +5,6 @@ import { Tooltip } from "@mui/material";
 
 export const Channel = (props) => {
   const click = () => {
-    if (props.render) {
-        props.setState({render: false})
-      } else {
-        props.setState({render: true})
-      }
     props.onClick(props.id);
   };
 
