@@ -10,7 +10,7 @@ import { Avatar } from "@mui/material";
 export default function Message(props) {
   const messagesEndRef = React.createRef();
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollIntoView({ behavior: `${props.scroll}` });
   };
   // const messagesEndRef = React.createRef();
   // const scrollToBottom = () => {

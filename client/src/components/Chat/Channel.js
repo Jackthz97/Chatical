@@ -5,6 +5,9 @@ import { Tooltip } from "@mui/material";
 
 export const Channel = (props) => {
   const click = () => {
+    if (props.scroll === 'smooth'){
+      props.setState({scroll: 'auto'})
+    } 
     props.onClick(props.id);
   };
 

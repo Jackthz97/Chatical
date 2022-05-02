@@ -17,6 +17,8 @@ export const ChannelList = (props) => {
         name={c.name}
         participants={c.participants}
         onClick={handleClick}
+        setState={props.setState}
+        scroll={props.scroll}
       />
     ));
   }

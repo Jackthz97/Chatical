@@ -14,6 +14,7 @@ export class Chat extends React.Component {
     socket: null,
     channel: null,
     msm: [],
+    scroll: "auto",
   };
   socket;
   componentDidMount() {
@@ -119,6 +120,8 @@ export class Chat extends React.Component {
           <ChannelList
             channels={this.state.channels}
             onSelectChannel={this.handleChannelSelect}
+            setState={this.setState}
+            scroll={this.state.scroll}
           />
         </Grid>
         <Grid item width={'100%'} xs={10}>
@@ -126,6 +129,8 @@ export class Chat extends React.Component {
             onSendMessage={this.handleSendMessage}
             channel={this.state.channel}
             msm={this.state.msm}
+            scroll={this.state.scroll}
+            setState={this.setState}
           />
         </Grid>
       </Grid>

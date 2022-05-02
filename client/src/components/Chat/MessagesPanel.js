@@ -19,6 +19,7 @@ export const MessagesPanel = (props) => {
             time={e.time}
             date={e.date}
             img={e.img}
+            scroll={props.scroll}
           />
         </>
       );
@@ -30,8 +31,8 @@ export const MessagesPanel = (props) => {
   }
 
   const send = (e) => {
-    // (scroll === 'smooth') && setScroll('auto');
     e.preventDefault();
+    (props.scroll === 'auto') && props.setState({scroll: 'smooth'});
     if (state.input_value && state.input_value != "") {
         props.onSendMessage(props.channel.id, state.input_value);
         setState({ input_value: "" });
@@ -54,6 +55,7 @@ export const MessagesPanel = (props) => {
             text={m.text}
             time={m.time}
             img={m.img}
+            scroll={props.scroll}
           />
         </>
       );
