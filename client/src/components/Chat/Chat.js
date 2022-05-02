@@ -7,16 +7,19 @@ import { Typography } from "@mui/material";
 import axios from "axios";
 const SERVER = "http://127.0.0.1:8080";
 export class Chat extends React.Component {
+
   state = {
     channels: null,
     socket: null,
     channel: null,
-    msm: "",
+    msm: [],
+    render: false
   };
   socket;
   componentDidMount() {
     this.loadChannels();
     this.configureSocket();
+    this.setState = this.setState.bind(this);
   }
 
   configureSocket = () => {
@@ -59,13 +62,18 @@ export class Chat extends React.Component {
   };
 
   handleChannelSelect = (id) => {
+    // if (this.state.render) {
+    //   this.setState({render: false})
+    // } else {
+    //   this.setState({render: true})
+    // }
     let channel = this.state.channels.find((c) => {
       return c.id === id;
     });
     this.setState({ channel });
     this.socket.emit("channel-join", id, (ack) => {});
     axios.put('/get-message', {data: id})
-    .then(res => this.state.msm(res.data))
+    .then(res => this.setState({msm: res.data}))
     .catch(error => console.log(error));
   };
 
@@ -92,6 +100,7 @@ export class Chat extends React.Component {
         channel_id: channel_id,
         date: date.toString(),
         time: time,
+        img: this.user.img
       };
     axios
     .put("/user-messages", data)
@@ -115,6 +124,8 @@ export class Chat extends React.Component {
           <ChannelList
             channels={this.state.channels}
             onSelectChannel={this.handleChannelSelect}
+            render={this.state.render}
+            setState={this.setState}
           />
         </Grid>
         <Grid item width={'100%'} xs={10}>
@@ -122,6 +133,7 @@ export class Chat extends React.Component {
             onSendMessage={this.handleSendMessage}
             channel={this.state.channel}
             msm={this.state.msm}
+            render={this.state.render}
           />
         </Grid>
       </Grid>

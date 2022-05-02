@@ -11,6 +11,30 @@ import axios from "axios";
 export const MessagesPanel = (props) => {
   const user = JSON.parse(localStorage.getItem("username"));
   const [state, setState] = useState({ input_value: "" });
+  console.log("testetststtststs: ", props.msm)
+
+  let prev;
+  if (props.msm) {
+    prev = props.msm.map((e) => {
+      return (
+        <>
+          <Message
+            key={e.user_id}
+            senderName={e.name}
+            text={e.text}
+            time={e.time}
+            date={e.date}
+            img={e.img}
+          />
+        </>
+      );
+    })
+  } if (!props.msm) {
+    prev = (
+      <div className="no-content-message">There is no messages to show</div>
+    );
+  }
+
   const send = (e) => {
     e.preventDefault();
     if (state.input_value && state.input_value != "") {
@@ -39,15 +63,11 @@ export const MessagesPanel = (props) => {
         </>
       );
     });
-  } else {
-    list = (
-      <div className="no-content-message">There is no messages to show</div>
-    );
-  }
-
+  } 
   return (
     <Grid container direction={"column"}>
       <Paper style={{ minHeight: "90vh", maxHeight: "90vh", overflow: "auto" }}>
+        {prev}
         {list}
       </Paper>
       <Grid item display="flex" justifyContent="space-between" mt={2}>
