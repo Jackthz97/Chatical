@@ -13,7 +13,7 @@ export const MessagesPanel = (props) => {
       return (
         <>
           <Message
-            key={e.user_id}
+            key={e.id}
             senderName={e.name}
             text={e.text}
             time={e.time}
@@ -46,6 +46,7 @@ export const MessagesPanel = (props) => {
   let list;
   if (props.channel && props.channel.messages) {
     list = props.channel.messages.map((m) => {
+      console.log("ran", m.text)
       return (
         <>
           <Message
@@ -68,7 +69,7 @@ export const MessagesPanel = (props) => {
         {list}
       </Paper>
       <Grid item display="flex" justifyContent="space-between" mt={2}>
-        {props.channel && (
+        {props.input && (
           <div>
             <Box component="form" onSubmit={send}>
               <Input

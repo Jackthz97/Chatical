@@ -8,6 +8,10 @@ export const Channel = (props) => {
     if (props.scroll === 'smooth'){
       props.setState({scroll: 'auto'})
     } 
+
+    // props.setState({channel: null})
+    // console.log("is channel null?", props.channel)
+
     props.onClick(props.id);
   };
 

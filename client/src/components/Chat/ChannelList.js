@@ -19,6 +19,7 @@ export const ChannelList = (props) => {
         onClick={handleClick}
         setState={props.setState}
         scroll={props.scroll}
+        channel={props.channel}
       />
     ));
   }

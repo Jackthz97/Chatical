@@ -15,8 +15,11 @@ export class Chat extends React.Component {
     channel: null,
     msm: [],
     scroll: "auto",
+    input: false,
   };
+
   socket;
+
   componentDidMount() {
     this.loadChannels();
     this.configureSocket();
@@ -24,12 +27,13 @@ export class Chat extends React.Component {
   }
 
   configureSocket = () => {
-    var socket = socketClient(SERVER);
+    let socket = socketClient(SERVER);
     socket.on("connection", () => {
       if (this.state.channel) {
         this.handleChannelSelect(this.state.channel.id);
       }
     });
+
     socket.on("channel", (channel) => {
       let channels = this.state.channels;
       channels.forEach((c) => {
@@ -41,6 +45,8 @@ export class Chat extends React.Component {
     });
     socket.on("message", (message) => {
       let channels = this.state.channels;
+      console.log("this is channels: ", channels)
+      console.log("this is messages: ", message)
       channels.forEach((c) => {
         if (c.id === message.channel_id) {
           if (!c.messages) {
@@ -63,10 +69,25 @@ export class Chat extends React.Component {
   };
 
   handleChannelSelect = (id) => {
+    // ok fixed it
+    if (this.state.channel){
+      // before we switch the channel, find the old channel in the channels list and remove it's messages
+      let channels = this.state.channels;
+      channels.forEach((c) => {
+        if (c.id === this.state.channel.id) {
+          c.messages = null
+        }
+      });
+      this.setState({ channels });
+    }
+
     let channel = this.state.channels.find((c) => {
       return c.id === id;
     });
+    // channel.messages = null;
     this.setState({ channel });
+    console.log("2314798whjaisdf98243", channel, this.state)
+    this.setState({ input: true })
     this.socket.emit("channel-join", id, (ack) => {});
     axios.put('/get-message', {data: id})
     .then(res => this.setState({msm: res.data}))
@@ -120,6 +141,7 @@ export class Chat extends React.Component {
           <ChannelList
             channels={this.state.channels}
             onSelectChannel={this.handleChannelSelect}
+            channel={this.state.channel}
             setState={this.setState}
             scroll={this.state.scroll}
           />
@@ -131,6 +153,7 @@ export class Chat extends React.Component {
             msm={this.state.msm}
             scroll={this.state.scroll}
             setState={this.setState}
+            input={this.state.input}
           />
         </Grid>
       </Grid>
