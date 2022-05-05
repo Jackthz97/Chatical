@@ -34,6 +34,7 @@ export const MessagesPanel = (props) => {
     e.preventDefault();
     (props.scroll === 'auto') && props.setState({scroll: 'smooth'});
     if (state.input_value && state.input_value != "") {
+      // console.log("channel id: ", props.channel.id,)
         props.onSendMessage(props.channel.id, state.input_value);
         setState({ input_value: "" });
     }
