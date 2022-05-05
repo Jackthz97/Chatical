@@ -51,7 +51,7 @@ app.put('/user-messages', (req, res) => {
     time: req.body.time,
     img: req.body.img
   };
-
+  console.log("insert messages",data.text, data.userid, data.user, data.channelid, data.date, data.time, data.img);
   db.query(`INSERT INTO messages (user_name, user_id, img, text, channels_id, date, time)
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`,
   [data.user, data.userid, data.img, data.text, data.channelid, data.date, data.time])
@@ -60,7 +60,7 @@ app.put('/user-messages', (req, res) => {
 });
 
 app.put('/get-message', (req, res) => {
-  console.log("from msm req: ",req.body);
+  console.log("from msm req: ", req.body);
   db.query(`SELECT * FROM messages WHERE channels_id = $1 ORDER BY id DESC LIMIT 20`, [req.body.data])
     .then(responds => {
       res.send(responds.rows.reverse());

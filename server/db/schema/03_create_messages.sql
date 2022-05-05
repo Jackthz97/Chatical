@@ -6,7 +6,7 @@ CREATE TABLE messages (
   user_id INTEGER REFERENCES users(id),
   img VARCHAR(255) NOT NULL,
   text VARCHAR(255) NOT NULL,
-  channels_id INTEGER REFERENCES channels(id),
+  channels_id VARCHAR(255) NOT NULL,
   date VARCHAR(255) NOT NULL,
   time VARCHAR(255) NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
