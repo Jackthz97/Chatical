@@ -5,6 +5,7 @@ import socketClient from "socket.io-client";
 import { Button, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import axios from "axios";
+import CreateChannel from "./CreateChannel";
 
 const SERVER = "http://127.0.0.1:8080";
 export class Chat extends React.Component {
@@ -145,6 +146,7 @@ export class Chat extends React.Component {
             setState={this.setState}
             scroll={this.state.scroll}
           />
+          <CreateChannel/>
         </Grid>
         <Grid item width={'100%'} xs={10}>
           <MessagesPanel

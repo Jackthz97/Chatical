@@ -8,6 +8,7 @@ import { CssBaseline } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import ProtectedRoutes from "./hooks/userAuth";
+import CreateChannelDetails from "./components/Chat/CreateChannelDetails";
 
 function App() {
   const [mode, setMode] = useState("dark");
@@ -55,7 +56,11 @@ function App() {
               path="/chat"
               element={<Chat mode={mode} setMode={setMode} />}
             />
-            </Route>
+          <Route
+              path="/channel"
+              element={<CreateChannelDetails mode={mode} setMode={setMode} />}
+            />
+          </Route>
         </Routes>
       </div>
     </ThemeProvider>
