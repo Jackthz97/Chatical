@@ -123,7 +123,6 @@ export class Chat extends React.Component {
     axios
     .put("/user-messages", data)
     .then((res) => console.log("res.data: ", res));
-
   };
   handleMode = () => {
     this.props.mode === "dark"
@@ -146,7 +145,7 @@ export class Chat extends React.Component {
             setState={this.setState}
             scroll={this.state.scroll}
           />
-          <CreateChannel/>
+          <CreateChannel mode={this.props.mode}/>
         </Grid>
         <Grid item width={'100%'} xs={10}>
           <MessagesPanel
