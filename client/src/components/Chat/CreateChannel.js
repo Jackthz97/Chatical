@@ -1,15 +1,15 @@
 import React from 'react'
 import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
-import { Link } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const CreateChannel = (props) => {
   return (
     <Grid container>
       <Link to="/channel">
-        <Button>
+
           Create Channel +
-        </Button>
+
       </Link>
     </Grid>
   )
