@@ -68,6 +68,21 @@ app.put('/get-message', (req, res) => {
     .catch((e) => console.error(e.stack));
 });
 
+app.put('/create-channel', (req, res) => {
+  let data = {
+    name: req.body.name,
+    description: req.body.description,
+    img: req.body.img,
+    userId: req.body.userId
+  };
+  console.log("from create channel", data.name, data.description, data.img, data.userId, req.body);
+  db.query(`INSERT INTO channels (channel_name, img, description, user_id)
+  VALUES ($1, $2, $3, $4) RETURNING *;`,
+  [data.name, data.img, data.description, data.userId])
+    .then((res) => res.send(res))
+    .catch((error) => res.send(error));
+});
+
 const server = http.createServer(app);
 
 const io = new Server(server, {
